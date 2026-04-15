@@ -1,0 +1,32 @@
+services:
+  task_db:
+    image: mysql:8
+    container_name: task_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_CHARSET: ${MYSQL_CHARSET}
+      MYSQL_COLLATION: ${MYSQL_COLLATION}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  task_app:
+    build: .
+    container_name: task_app
+    volumes:
+      - .:/task_app
+    depends_on:
+      - task_db
+    environment:
+      RAILS_ENV: ${RAILS_ENV}
+      DATABASE_URL: mysql2://${MYSQL_USER}:${MYSQL_PASSWORD}@task_db/${MYSQL_DATABASE}
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0 -p 9001"
+    ports:
+      - "9001:9001"
+    tty: true
+    stdin_open: true
+volumes:
+  mysql_data:
