@@ -16,18 +16,21 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['MYSQL_USER'] %>
   password: <%= ENV['MYSQL_PASSWORD'] %>
-  socket: /var/run/mysqld/mysqld.sock
 
 development:
   <<: *default
   database: <%= ENV['MYSQL_DATABASE'] %>
+  host: task_db
+  port: 3306
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: task_test
+# test:
+#   <<: *default
+#   database: task_test
+#   host: task_db
+#   port: 3306
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -49,21 +52,21 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-production:
-  primary: &primary_production
-    <<: *default
-    database: task_db
-    username: task_user
-    password: <%= ENV["MYSQL_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: task_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: task_queue_db
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: task_cable_db
-    migrations_paths: db/cable_migrate
+# production:
+#   primary: &primary_production
+#     <<: *default
+#     database: task_db
+#     username: task_user
+#     password: <%= ENV["MYSQL_PASSWORD"] %>
+#   cache:
+#     <<: *primary_production
+#     database: task_cache
+#     migrations_paths: db/cache_migrate
+#   queue:
+#     <<: *primary_production
+#     database: task_queue_db
+#     migrations_paths: db/queue_migrate
+#   cable:
+#     <<: *primary_production
+#     database: task_cable_db
+#     migrations_paths: db/cable_migrate

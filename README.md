@@ -10,10 +10,10 @@ Build: `docker compose build`
 
 Container Startup: `docker compose up -d`
 
-rail container execution: `docker exec -it task_app bash`
+rail container execution: `docker compose exec task_app bash`
 
-Inside the rails app container, create DB & run migration: `bin/rails db:create db:migrate`
+Inside the rails app container, create DB & run migration: `rails db:create db:migrate`
 
-DB container execution: `docker exec -it task_db bash`
+DB container execution: `docker compose exec task_db bash`
 
 Access the app at: http://localhost:9001
