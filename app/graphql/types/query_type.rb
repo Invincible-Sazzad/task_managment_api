@@ -22,5 +22,6 @@ module Types
     # They will be entry points for queries on your schema.
 
     field :tasks, resolver: Resolvers::TasksResolver
+    field :task, resolver: Resolvers::TaskResolver
   end
 end
