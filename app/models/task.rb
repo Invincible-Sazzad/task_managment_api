@@ -12,7 +12,7 @@ class Task < ApplicationRecord
     where(status: status) if status.present?
   }
 
-  scope :due_from, ->(date) { 
+  scope :due_from, ->(date) {
     where(due_date: date..) if date.present?
   }
 
