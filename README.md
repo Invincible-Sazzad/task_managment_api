@@ -10,10 +10,17 @@ Build: `docker compose build`
 
 Container Startup: `docker compose up -d`
 
-rail container execution: `docker compose exec task_app bash`
+Rails app container execution: `docker compose exec task_app bash`
 
-Inside the rails app container, create DB & run migration: `rails db:create db:migrate`
+Inside the rails app container:
+ - create a Rails secret key using `rails secret` command and set it to DEVISE_JWT_SECRET_KEY of the .env file.
+ - create DB, run migration & seed the user: `rails db:create db:migrate db:seed`
 
 DB container execution: `docker compose exec task_db bash`
 
 Access the app at: http://localhost:9001
+
+
+## Note:
+
+Authentication is implemented using REST endpoints via Devise for security and simplicity, while all business logic APIs are exposed via GraphQL.
