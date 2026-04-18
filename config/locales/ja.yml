@@ -1,0 +1,42 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      task: タスク
+    attributes:
+      user:
+        id: ユーザー内部ID
+        email: メールアドレス
+        created_at: 作成日
+        updated_at: 更新日
+      task:
+        id: タスク内部ID
+        title: タスクタイトル
+        description: タスクの説明
+        status: タスクのステータス
+        due_date: 期限日
+        completed_at: 完了日
+        user_id: ユーザー内部ID
+        created_at: 作成日
+        updated_at: 更新日
+  auth:
+    login:
+      success: "ログインに成功しました"
+      failure: "メールアドレスまたはパスワードが正しくありません"
+    logout:
+      success: "ログアウトしました"
+      failure: "ログアウトに失敗しました"
+    signup:
+      success: "アカウント登録が完了しました"
+      failure: "アカウント登録に失敗しました"
+    unauthorized: "認証が必要です"
+  error_messages:
+    task:
+      not_found: "タスクが見つかりませんでした"
+      invalid_due_date_range: "無効な期限日範囲: 開始日が終了日より後です"
+  devise:
+    registrations:
+      signed_up: "アカウント登録が完了しました。"
+    failure:
+      user:
+        unauthenticated: "認証に失敗しました。"

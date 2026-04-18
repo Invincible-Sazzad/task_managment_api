@@ -6,11 +6,12 @@ module Mutations
     field :errors, [String], null: false
 
     def resolve(id:)
-      task = Task.find_by(id: id)
+      user = authenticate_user!
+      task = user.tasks.find_by(id: id)
 
       return {
         success: false,
-        errors: ["Task not found"]
+        errors: [I18n.t("error_messages.task.not_found")]
       } unless task
 
       if task.destroy

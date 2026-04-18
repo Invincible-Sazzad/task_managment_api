@@ -5,7 +5,8 @@ module Resolvers
     argument :id, ID, required: true
 
     def resolve(id:)
-      Task.find_by(id: id)
+      user = authenticate_user!
+      user.tasks.find_by(id: id)
     end
   end
 end

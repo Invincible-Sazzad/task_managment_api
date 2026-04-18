@@ -10,11 +10,12 @@ module Mutations
     field :errors, [String], null: false
 
     def resolve(id:, **args)
-      existing_task = Task.find_by(id: id)
+      user = authenticate_user!
+      existing_task = user.tasks.find_by(id: id)
 
       return {
         task: nil,
-        errors: ["Task not found"]
+        errors: [I18n.t("error_messages.task.not_found")]
       } unless existing_task
 
       update_attrs = args.compact

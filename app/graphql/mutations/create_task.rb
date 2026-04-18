@@ -9,7 +9,8 @@ module Mutations
     field :errors, [String], null: false
 
     def resolve(title:, description: nil, status: nil, due_date: nil)
-      new_task = Task.new(title: title, description: description, status: status, due_date: due_date)
+      user = authenticate_user!
+      new_task = user.tasks.new(title: title, description: description, status: status, due_date: due_date)
 
       if new_task.save
         {
