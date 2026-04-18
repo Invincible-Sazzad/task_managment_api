@@ -25,7 +25,7 @@ class Task < ApplicationRecord
   private
 
   def set_completed_at
-    return unless saved_change_to_status?
+    return unless will_save_change_to_status?
 
     self.completed_at =
       if completed?
