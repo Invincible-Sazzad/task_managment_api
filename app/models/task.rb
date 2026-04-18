@@ -8,6 +8,8 @@ class Task < ApplicationRecord
   validates :title, presence: true
   validates :status, presence: true
 
+  before_save :set_completed_at
+
   scope :with_status, ->(status) {
     where(status: status) if status.present?
   }
@@ -19,4 +21,17 @@ class Task < ApplicationRecord
   scope :due_to, ->(date) {
     where(due_date: ..date) if date.present?
   }
+
+  private
+
+  def set_completed_at
+    return unless saved_change_to_status?
+
+    self.completed_at =
+      if completed?
+        completed_at || Time.zone.now
+      else
+        nil
+      end
+  end
 end
