@@ -4,3 +4,12 @@
 User.find_or_create_by!(email: "test@example.com") do |user|
   user.password = "password123"
 end
+
+10.times do |i|
+  Task.find_or_create_by!(title: "Sample Task #{i + 1}") do |task|
+    task.description = "Description for Sample Task #{i + 1}"
+    task.user = User.first
+    task.status = "pending"
+    task.due_date = Date.today + (i + 1).days
+  end
+end

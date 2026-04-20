@@ -7,7 +7,8 @@ class Task < ApplicationRecord
     completed: 2
   }
 
-  validates :title, presence: true
+  validates :title, presence: true, length: { maximum: 255 }
+  validates :description, length: { maximum: 500 }
   validates :status, presence: true
 
   before_save :set_completed_at
